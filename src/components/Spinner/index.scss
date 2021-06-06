@@ -4,9 +4,8 @@
     border: 16px solid $white;
     border-radius: 50%;
     border-top: 16px solid $theme-colour;
-    animation: spin .7s linear infinite;
+    animation: load .7s linear infinite;
     position: fixed;
-    z-index: 999;
     margin: auto;
     top: 0;
     left: 0;
@@ -16,12 +15,12 @@
     height: 50px;
 }
   
-  @keyframes spin {
+  @keyframes load {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
   }
 
-  @-webkit-keyframes spin { 
+  @-webkit-keyframes load { 
     0% { -webkit-transform: rotate(0deg); }
     100% { -webkit-transform: rotate(360deg); }
   }

@@ -1,52 +1,55 @@
 @import '../../vars';
-
 .trending {
-
-    box-sizing: border-box;
-    &>form {
-        &>.search-bar{
-            input {
-                position: fixed;
-            }
-            overflow: hidden;
-            padding-right: 0.5rem;
-        }
-        &>button{
-            
-        }
-    }
-    
+	box-sizing: border-box;
+	&>form {
+		position: sticky;
+		top: 70px;
+		>button {
+			float: right;
+			width: 50px;
+			height: 50px;
+			color: white;
+			background: radial-gradient(circle, rgba(34, 193, 195, 1) 0%, rgb(123, 34, 195) 50%);
+			background-size: 300% 100%;
+			animation: giphy-button-shine 3s infinite;
+			cursor: pointer;
+			border: 0;
+		}
+		&>.search-bar {
+			overflow: hidden;
+			>input {
+				width: 100%;
+				font-size: 20px;
+				height: 50px;
+				margin: 0;
+				box-sizing: border-box;
+				-moz-box-sizing: border-box;
+				-webkit-box-sizing: border-box;
+				&:focus {
+					outline: none;
+				}
+			}
+		}
+	}
 	&>.gif-items {
-        img{
-            width: 100%;
-            height: 100%;
-        }
+		>.gif img {
+			border-radius: 5px;
+			width: 100%;
+			height: 100%;
+		}
+		margin-top: 40px;
 		display: grid;
 		gap: 10px;
-		grid-template-columns: repeat(auto-fit, minmax(max(10%, min(300px, 100%)), 1fr));
+		grid-template-columns: repeat(auto-fit, minmax(max(10%, min(200px, 100%)), 1fr));
 	}
-    &>#load-more {
-        display: flex;
-        justify-content: center;
-    }
-    &>#load-more > button {
-        border-radius: 5px;
-        justify-content: center;
-        text-align: center;
-        cursor: pointer;
-        background: none;
-        border: 2px solid $theme-colour;
-        color: $white;
-        padding: 14px 28px;
-        font-size: 16px;
-    }
-
-    &>#load-more > button:hover {
-        background-color: $theme-colour;
-        transition: .2s;
-    }
-
-    &>.gif {
-        border-radius: 4px;
-    }
+	&>#load-more {
+		display: flex;
+		justify-content: center;
+		margin: 20px;
+	}
+	@keyframes giphy-button-shine {
+		0% {
+			background-position: right;
+		}
+	}
 }
