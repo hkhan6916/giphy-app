@@ -1,0 +1,35 @@
+@import '../vars';
+
+.wrapper {
+	display: flex;
+	flex-direction: column;
+	height: 100vh;
+	background-color: $black;
+	
+	& > header {
+		z-index: 99999;
+		position: fixed;
+		height: 70px;
+		width: 100%;
+		display: flex;
+		justify-content: space-between;
+		background-color: $black;
+		padding: 0 60px;
+		.logo-img {
+			height: 100%;
+		}
+	}
+
+	& > main {
+		background-color: $black;
+		margin-top: 70px;
+		flex: 1;
+		padding: 0 60px;
+	}
+
+	@media(max-width: $tablet) {
+		& > main {
+			padding: 0;
+		}
+	}
+}
