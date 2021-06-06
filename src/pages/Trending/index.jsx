@@ -59,7 +59,7 @@ class Trending extends Component {
                 <div className='trending'>
                     <form onSubmit={this.handleSearch}>
                         <button type='submit'>
-                            <VscSearch />
+                            <VscSearch size={26} />
                         </button>
                         <div className='search-bar'>
                             <input
