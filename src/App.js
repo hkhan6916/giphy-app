@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import MainLayout from './layouts/Main';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { Routes, Route, BrowserRouter } from 'react-router-dom';
 
 import Trending from './pages/Trending';
 
@@ -9,15 +9,15 @@ import './App.scss';
 class App extends Component {
     render() {
         return (
-            <Router>
+            <BrowserRouter>
                 <div id='app'>
                     <MainLayout>
-                        <Switch>
-                            <Route exact path='/' component={Trending} />
-                        </Switch>
+                        <Routes>
+                            <Route exact path='/' element={<Trending />} />
+                        </Routes>
                     </MainLayout>
                 </div>
-            </Router>
+            </BrowserRouter>
         );
     }
 }

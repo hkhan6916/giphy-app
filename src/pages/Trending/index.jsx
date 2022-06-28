@@ -4,19 +4,18 @@ import fetchGifs from '../../helpers/fetchGifs';
 import { Spinner } from '../../components/Spinner';
 import { Button } from '../../components/ButtonOutlined';
 
-import { VscSearch } from 'react-icons/vsc';
-
 import './index.scss';
+import SearchBar from '../../components/SearchBar';
+import Gif from '../../components/Gif';
 
 class Trending extends Component {
     state = {
         gifs: [],
-        loading: false,
+        loading: true,
         type: '',
     };
 
     async componentDidMount() {
-        this.setState({ loading: true });
         window.scrollTo(0, 0);
         const gifs = await fetchGifs('trending');
         this.setState({
@@ -26,11 +25,10 @@ class Trending extends Component {
         });
     }
 
-    handleSearch = async (e) => {
+    handleSearch = async (value) => {
         window.scrollTo(0, 0);
-        e.preventDefault();
-        const gifs = await fetchGifs('search', this.searchInput?.value);
-        const type = this.searchInput?.value ? 'search' : 'trending';
+        const gifs = await fetchGifs('search', value);
+        const type = value ? 'search' : 'trending';
 
         this.setState({
             gifs,
@@ -38,13 +36,13 @@ class Trending extends Component {
         });
     };
 
-    handleLoadMore = async (e) => {
-        let gifs = await fetchGifs(
-            this.state.type, // i.e. search
-            this.searchInput?.value, // i.e. cat or '' if search bar is empty
+    handleLoadMore = async () => {
+        const gifs = await fetchGifs(
+            this.state.type, // e.g. search but defaults to trending
+            this.searchInput?.value, // e.g. cat
             this.state.gifs.length + 25
         );
-        // I use the offset param in the api to load 25 more gifs
+        // I use the offset param in the api to load 20 more gifs
         const newGifArray = [...this.state.gifs, ...gifs];
         this.setState({
             gifs: newGifArray,
@@ -57,20 +55,15 @@ class Trending extends Component {
         if (!this.state.loading) {
             return (
                 <div className='trending'>
-                    <form onSubmit={this.handleSearch}>
-                        <button type='submit'>
-                            <VscSearch size={26} />
-                        </button>
-                        <div className='search-bar'>
-                            <input
-                                placeholder='Search Gifs'
-                                ref={(input) => {
-                                    this.searchInput = input;
-                                }}
-                                onChange={this.handleSearch}
-                            />
-                        </div>
-                    </form>
+                    <SearchBar
+                        debounceDelay={500}
+                        onTypingEnd={this.handleSearch}
+                        innerRef={(input) => {
+                            this.searchInput = input;
+                        }}
+                        placeholder='Search gifs...'
+                    />
+
                     {this.searchInput?.value ? (
                         <h3 style={{ color: '#fff' }}>
                             Showing Results For {this.searchInput?.value}
@@ -82,7 +75,7 @@ class Trending extends Component {
                         {gifs.length ? (
                             gifs.map((gif, i) => (
                                 <div key={i} className='gif'>
-                                    <img
+                                    <Gif
                                         key={i}
                                         src={gif.images?.fixed_width?.url}
                                     />

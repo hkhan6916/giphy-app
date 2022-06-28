@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SearchBar should render correctly 1`] = `
+<input
+  alt="Input Box"
+  class="input"
+  name="testSearchBar"
+  placeholder="test search placeholder"
+  type="search"
+  value=""
+/>
+`;
